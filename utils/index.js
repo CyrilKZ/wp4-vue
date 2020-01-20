@@ -78,7 +78,7 @@ To get started:
     )}${lintMsg(data)}npm run dev`
   )}
   
-Documentation can be found at https://vuejs-templates.github.io/webpack
+Documentation can be found at https://https://github.com/CyrilKZ/wp4-vue
 `
   console.log(message)
 }
