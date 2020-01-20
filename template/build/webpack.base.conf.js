@@ -3,21 +3,11 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
-
-{{#lint}}const createLintingRule = () => ({
-  test: /\.(js|vue)$/,
-  loader: 'eslint-loader',
-  enforce: 'pre',
-  include: [resolve('src'), resolve('test')],
-  options: {
-    formatter: require('eslint-friendly-formatter'),
-    emitWarning: !config.dev.showEslintErrorsInOverlay
-  }
-}){{/lint}}
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
@@ -42,9 +32,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {{#lint}}
-      ...(config.dev.useEslint ? [createLintingRule()] : []),
-      {{/lint}}
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -81,6 +68,9 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new VueLoaderPlugin()
+  ],
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).
