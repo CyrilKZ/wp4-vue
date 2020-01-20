@@ -8,11 +8,10 @@ With the code from `index.js`, we insert those answers into the metalsmith metad
 
 ## The scenarios
 
-We currently have 3 scenarios set up:
+We currently have 1 scenarios set up:
 
-1. 'minimal': it basically answers "no" to ever choice, so no router, no eslint, no tests
-2. 'full': It answers "yes" to every choice. With router, with linting (standard), with full tests (jest & e2e)
-3. 'full-airbnb-karma': like 'full', but using airbnb eslint config instead of standard and karma instead of jest for unit tests.
+'full': It answers "yes" to every choice. With router, with linting (standard)
+
 
 Other permutations might be worth testing to secure against edge cases, but this gives us a decent level of security over common combinations.
 
