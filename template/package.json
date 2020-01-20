@@ -14,10 +14,8 @@
   },
   "dependencies": {
     "vue": "^2.6.11"{{#router}},
-    "vue-router": "^3.0.1"{{/router}}
-    {{#vuetify}}
-    "vuetify": "^2.2.4"
-    {{/vuetify}}
+    "vue-router": "^3.0.1"{{/router}}{{#vuetify}},
+    "vuetify": "^2.2.4"{{/vuetify}}
   },
   "devDependencies": {
     {{#lint}}
