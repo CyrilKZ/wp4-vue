@@ -30,25 +30,24 @@ const webpackConfig = merge(baseWebpackConfig, {
   optimization: {
     splitChunks:{
       maxSize: 214000
-    }
+    },
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          output: {
+            comments: false
+          }
+        },
+        sourceMap: config.build.productionSourceMap,
+        extractComments: false
+      })
+    ]
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
-    }),
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        output: {
-          comments: false
-        },
-        compress: {
-          drop_console: true,
-          pure_funcs: ['console.log']
-        }
-      },
-      sourceMap: config.build.productionSourceMap,
-      parallel: true
     }),
     // extract css into its own file
     new ExtractTextPlugin({
