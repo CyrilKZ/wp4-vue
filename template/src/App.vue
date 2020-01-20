@@ -1,6 +1,11 @@
 <template>
   <div id="app">
     <img :src="require('./assets/logo.png').default">
+    {{#vuetify}}
+    <v-card>
+      <div>vuetify-on!</div>
+    </v-card>
+    {{/vuetify}}
     {{#router}}
     <router-view/>
     {{else}}

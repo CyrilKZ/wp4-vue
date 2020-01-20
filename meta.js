@@ -96,11 +96,17 @@ module.exports = {
         },
       ],
     },
+    vuetify: {
+      when: 'isNotTest',
+      type: 'confirm',
+      message: 'Use Vuetify as UI framework?',
+    }
   },
   filters: {
     '.eslintrc.js': 'lint',
     '.eslintignore': 'lint',
     'src/router/**/*': 'router',
+    'src/vuetify/**/*': 'vuetify',
   },
   complete: function(data, { chalk }) {
     const green = chalk.green

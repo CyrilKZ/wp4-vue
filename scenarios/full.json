@@ -6,5 +6,6 @@
   "build": "runtime",
   "router": false,
   "lint": true,
-  "lintConfig": "standard"
+  "lintConfig": "standard",
+  "vuetify": true
 }

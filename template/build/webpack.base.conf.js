@@ -4,6 +4,9 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+{{#vuetify}}
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
+{{/vuetify}}
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -65,11 +68,44 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
+      },
+      {{#vuetify}}
+      {
+        test: /\.s(c|a)ss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            // Requires sass-loader@^7.0.0
+            options: {
+              implementation: require('sass'),
+              fiber: require('fibers'),
+              indentedSyntax: true // optional
+            },
+            // Requires sass-loader@^8.0.0
+            options: {
+              implementation: require('sass'),
+              sassOptions: {
+                fiber: require('fibers'),
+                indentedSyntax: true // optional
+              },
+            },
+          },
+        ],
+      },
+      {{/vuetify}}
     ]
   },
   plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(){{#vuetify}},
+    new VuetifyLoaderPlugin({
+      match (originalTag, { kebabTag, camelTag, path, component }) {
+        if (kebabTag.startsWith('core-')) {
+          return [camelTag, `import ${camelTag} from '@/components/core/${camelTag.substring(4)}.vue'`]
+        }
+      }
+    }){{/vuetify}}
   ],
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
